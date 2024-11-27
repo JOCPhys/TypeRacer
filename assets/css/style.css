@@ -47,3 +47,19 @@ header button:hover {
 .border {
     border: 1px solid #dee2e6 !important;
 }
+
+.btn-custom {
+    background-color: white;
+    border: 2px solid #ff8400;
+    color: black;
+    margin: 0 5px;
+}
+
+.btn-custom:hover {
+    background-color: #ff8400;
+    color: white;
+}
+
+.text-center {
+    text-align: center;
+}

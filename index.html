@@ -11,25 +11,43 @@
     <title>TypeRacer</title>
 </head>
 <body>
-    <header class="d-flex justify-content-between align-items-center p-3 text-white" style="background-color: var(--primary-color);">
+    <header class="d-flex flex-column align-items-center p-3 text-white" style="background-color: var(--primary-color);">
         <h1 class="m-0">TypeRacer</h1>
-        <button class="btn btn-light" id="instructions-button">Instructions</button>
+        <button class="btn btn-light mt-2" id="instructions-button">Instructions</button>
     </header>
 
-    <div class="container mt-4">
+    <div class="mt-4">
         <div class="row">
             <div class="col-12 col-md-8">
                 <div class="p-3 bg-light border">
                     <div class="mb-3">
-                        <p id="sampleText">The quick brown fox jumps over the lazy dog.</p>
-                        <textarea class="form-control" id="typingArea" rows="3" placeholder="Start typing here..."></textarea>
+                        <label for="difficultySelector">Select Difficulty:</label>
+                        <select class="form-control" id="difficultySelector">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
                     </div>
+                    <div>
+                        <p>Test your typing speed by typing the text below:</p>
+                    </div>
+                    <div class="p-3 bg-light border">
                     <div class="mb-3">
-                        <button class="btn btn-primary" id="startButton">Start</button>
-                        <button class="btn btn-secondary" id="stopButton">Stop</button>
-                        <button class="btn btn-danger" id="retryButton">Retry</button>
+                        <p id="sampleText">The quick brown fox jumps over the lazy dog.</p>
+                    </div>
+                        </div>
+                        <div class="p-3 bg-light border">
+                        <div class="mb-3">
+                        <textarea class="form-control" id="typingArea" rows="3" placeholder="Click the start button to begin the test"></textarea>
                     </div>
                 </div>
+                    <div class="mb-3 text-center">
+                        <button class="btn btn-custom" id="startButton">Start</button>
+                        <button class="btn btn-custom" id="stopButton">Stop</button>
+                        <button class="btn btn-custom" id="retryButton">Retry</button>
+                    </div>
+                </div>
+    
             </div>
             <div class="col-12 col-md-4">
                 <div class="p-3 bg-light border">Right Column (Statistics/Info)</div>
