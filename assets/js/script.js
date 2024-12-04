@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     const sampleText = document.getElementById('sampleText');
     const difficultySelector = document.getElementById('difficultySelector');
+    const startButton = document.getElementById('startButton');
+    const stopButton = document.getElementById('stopButton');
+    const timeDisplay = document.getElementById('time');
+    let startTime, endTime;
 
     const texts = {
         easy: [
@@ -26,5 +30,21 @@ document.addEventListener('DOMContentLoaded', function() {
         sampleText.textContent = randomText;
     }
 
+    function startTest() {
+        startTime = new Date();
+        startButton.disabled = true;
+        stopButton.disabled = false;
+    }
+
+    function stopTest() {
+        endTime = new Date();
+        const testTime = (endTime - startTime) / 1000; // time in seconds
+        timeDisplay.textContent = testTime.toFixed(2);
+        startButton.disabled = false;
+        stopButton.disabled = true;
+    }
+
+    startButton.addEventListener('click', startTest);
+    stopButton.addEventListener('click', stopTest);
     difficultySelector.addEventListener('change', updateSampleText);
 });
