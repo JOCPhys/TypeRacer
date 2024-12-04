@@ -3,7 +3,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const difficultySelector = document.getElementById('difficultySelector');
     const startButton = document.getElementById('startButton');
     const stopButton = document.getElementById('stopButton');
+    const typingArea = document.getElementById('typingArea');
     const timeDisplay = document.getElementById('time');
+    const wpmDisplay = document.getElementById('wpm');
+    const levelDisplay = document.getElementById('level');
     let startTime, endTime;
 
     const texts = {
@@ -34,14 +37,36 @@ document.addEventListener('DOMContentLoaded', function() {
         startTime = new Date();
         startButton.disabled = true;
         stopButton.disabled = false;
+        typingArea.disabled = false;
+        typingArea.value = ''; // Clear the typing area
+        typingArea.focus(); // Focus on the typing area
     }
 
     function stopTest() {
         endTime = new Date();
         const testTime = (endTime - startTime) / 1000; // time in seconds
-        timeDisplay.textContent = testTime.toFixed(2);
+        timeDisplay.textContent = testTime.toFixed(2) + 's';
         startButton.disabled = false;
         stopButton.disabled = true;
+        typingArea.disabled = true;
+
+        // Calculate WPM
+        const typedText = typingArea.value.trim();
+        const sampleWords = sampleText.textContent.trim().split(/\s+/);
+        const typedWords = typedText.split(/\s+/);
+        let correctWords = 0;
+
+        for (let i = 0; i < typedWords.length; i++) {
+            if (typedWords[i] === sampleWords[i]) {
+                correctWords++;
+            }
+        }
+
+        const wpm = Math.round((correctWords / testTime) * 60);
+        wpmDisplay.textContent = wpm;
+
+        // Display difficulty level
+        levelDisplay.textContent = difficultySelector.value.charAt(0).toUpperCase() + difficultySelector.value.slice(1);
     }
 
     startButton.addEventListener('click', startTest);
