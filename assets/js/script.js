@@ -69,7 +69,27 @@ document.addEventListener('DOMContentLoaded', function() {
         levelDisplay.textContent = difficultySelector.value.charAt(0).toUpperCase() + difficultySelector.value.slice(1);
     }
 
+    function highlightTyping() {
+        const typedText = typingArea.value;
+        const sampleWords = sampleText.textContent.split(/\s+/);
+        const typedWords = typedText.split(/\s+/);
+        let highlightedText = '';
+
+        for (let i = 0; i < sampleWords.length; i++) {
+            if (typedWords[i] === undefined) {
+                highlightedText += `<span>${sampleWords[i]}</span> `;
+            } else if (typedWords[i] === sampleWords[i]) {
+                highlightedText += `<span style="color: blue;">${sampleWords[i]}</span> `;
+            } else {
+                highlightedText += `<span style="color: red;">${sampleWords[i]}</span> `;
+            }
+        }
+
+        sampleText.innerHTML = highlightedText.trim();
+    }
+
     startButton.addEventListener('click', startTest);
     stopButton.addEventListener('click', stopTest);
     difficultySelector.addEventListener('change', updateSampleText);
+    typingArea.addEventListener('input', highlightTyping);
 });
