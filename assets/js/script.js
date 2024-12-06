@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const sampleText = document.getElementById('sampleText');
     const difficultySelector = document.getElementById('difficultySelector');
-    const startButton = document.getElementById('startButton');
-    const stopButton = document.getElementById('stopButton');
     const typingArea = document.getElementById('typingArea');
     const timeDisplay = document.getElementById('time');
     const wpmDisplay = document.getElementById('wpm');
@@ -35,8 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function startTest() {
         startTime = new Date();
-        startButton.disabled = true;
-        stopButton.disabled = false;
         typingArea.disabled = false;
         typingArea.value = ''; // Clear the typing area
         typingArea.focus(); // Focus on the typing area
@@ -46,8 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
         endTime = new Date();
         const testTime = (endTime - startTime) / 1000; // time in seconds
         timeDisplay.textContent = testTime.toFixed(2) + 's';
-        startButton.disabled = false;
-        stopButton.disabled = true;
         typingArea.disabled = true;
 
         // Calculate WPM
@@ -88,8 +82,18 @@ document.addEventListener('DOMContentLoaded', function() {
         sampleText.innerHTML = highlightedText.trim();
     }
 
-    startButton.addEventListener('click', startTest);
-    stopButton.addEventListener('click', stopTest);
+    function handleTyping(event) {
+        if (!startTime) {
+            startTest();
+        }
+        if (event.key === 'Enter') {
+            stopTest();
+        } else {
+            highlightTyping();
+        }
+    }
+
     difficultySelector.addEventListener('change', updateSampleText);
     typingArea.addEventListener('input', highlightTyping);
+    typingArea.addEventListener('keydown', handleTyping);
 });
