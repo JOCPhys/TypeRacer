@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const wpmDisplay = document.getElementById('wpm');
     const levelDisplay = document.getElementById('level');
     const retryButton = document.getElementById('retryButton');
+    const instructionsButton = document.getElementById('instructions-button');
     let startTime, endTime;
 
     const texts = {
@@ -114,4 +115,10 @@ document.addEventListener('DOMContentLoaded', function() {
     typingArea.addEventListener('input', highlightTyping);
     typingArea.addEventListener('keydown', handleTyping);
     retryButton.addEventListener('click', resetTest);
+
+     // Instructions button event listener
+     instructionsButton.addEventListener('click', function() {
+        const instructionsModal = new bootstrap.Modal(document.getElementById('instructionsModal'));
+        instructionsModal.show();
+    });
 });
