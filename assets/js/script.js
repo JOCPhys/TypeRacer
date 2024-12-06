@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         typingArea.disabled = false;
         typingArea.value = ''; // Clear the typing area
         typingArea.focus(); // Focus on the typing area
+        retryButton.disabled = true; // Disable the retry button
     }
 
     function stopTest() {
@@ -45,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const testTime = (endTime - startTime) / 1000; // time in seconds
         timeDisplay.textContent = testTime.toFixed(2) + 's';
         typingArea.disabled = true;
+        retryButton.disabled = false; // Enable the retry button
 
         // Calculate WPM
         const typedText = typingArea.value.trim();
@@ -102,9 +104,10 @@ document.addEventListener('DOMContentLoaded', function() {
         timeDisplay.textContent = '0';
         wpmDisplay.textContent = '0';
         levelDisplay.textContent = difficultySelector.value.charAt(0).toUpperCase() + difficultySelector.value.slice(1);
-        updateSampleText();
+        updateSampleText(); // Load a new sample sentence
         typingArea.disabled = false;
         typingArea.focus();
+        retryButton.disabled = false; // Enable the retry button
     }
 
     difficultySelector.addEventListener('change', updateSampleText);
