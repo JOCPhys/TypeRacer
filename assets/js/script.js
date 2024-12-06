@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const timeDisplay = document.getElementById('time');
     const wpmDisplay = document.getElementById('wpm');
     const levelDisplay = document.getElementById('level');
+    const retryButton = document.getElementById('retryButton');
     let startTime, endTime;
 
     const texts = {
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedDifficulty = difficultySelector.value;
         const randomText = texts[selectedDifficulty][Math.floor(Math.random() * texts[selectedDifficulty].length)];
         sampleText.textContent = randomText;
+        typingArea.value = ''; // Clear the typing area
     }
 
     function startTest() {
@@ -93,7 +95,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function resetTest() {
+        startTime = null;
+        endTime = null;
+        typingArea.value = '';
+        timeDisplay.textContent = '0';
+        wpmDisplay.textContent = '0';
+        levelDisplay.textContent = difficultySelector.value.charAt(0).toUpperCase() + difficultySelector.value.slice(1);
+        updateSampleText();
+        typingArea.disabled = false;
+        typingArea.focus();
+    }
+
     difficultySelector.addEventListener('change', updateSampleText);
     typingArea.addEventListener('input', highlightTyping);
     typingArea.addEventListener('keydown', handleTyping);
+    retryButton.addEventListener('click', resetTest);
 });
